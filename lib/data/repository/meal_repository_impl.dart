@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:msiglife_test/data/repository/source/meal_remote.dart';
+import 'package:msiglife_test/data/repository/source/local/meal_local.dart';
+import 'package:msiglife_test/data/repository/source/remote/meal_remote.dart';
 import 'package:msiglife_test/domain/entity/meal_category/meal_category_entity.dart';
 import 'package:msiglife_test/domain/entity/meal_data/meal_data.dart';
 import 'package:msiglife_test/domain/entity/meal_filtered_data/meal_filtered_data_entiy.dart';
@@ -12,12 +13,14 @@ import 'package:msiglife_test/state/data_state/data_state.dart';
 @LazySingleton(as: MealRepository)
 class MealRepositoryImpl implements MealRepository {
   final MealRemote _remote;
+  final MealLocal _local;
   final MealCategoryMapper _categoryMapper;
   final MealFilteredDataMapper _filteredDataMapper;
   final MealDataMapper _dataMapper;
 
   MealRepositoryImpl(
     this._remote,
+    this._local,
     this._categoryMapper,
     this._filteredDataMapper,
     this._dataMapper,
@@ -76,7 +79,7 @@ class MealRepositoryImpl implements MealRepository {
     return result.when(
       success: (data) {
         return DataState.success(
-          data: _dataMapper.toEntity(data),
+          data: _dataMapper.fromModelToEntity(data),
         );
       },
       error: (message, data, exception, stackTrace, statusCode) {
@@ -96,7 +99,7 @@ class MealRepositoryImpl implements MealRepository {
     return result.when(
       success: (data) {
         return DataState.success(
-          data: data.map((e) => _categoryMapper.toEntity(e)).toList(),
+          data: data.map((e) => _categoryMapper.fromModelToEntity(e)).toList(),
         );
       },
       error: (message, data, exception, stackTrace, statusCode) {
@@ -108,5 +111,54 @@ class MealRepositoryImpl implements MealRepository {
         );
       },
     );
+  }
+
+  @override
+  Future<DataState<bool>> addToFavorite(data) async {
+    try {
+      final result = await _local.insertMealData(_dataMapper.fromEntityToDb(data));
+      if(result == 0){
+        return const DataState.success(data: false);
+      }else{
+        return const DataState.success(data: true);
+      }
+    } catch (e) {
+      return DataState.error(message: e.toString());
+    }
+  }
+
+  @override
+  Future<DataState<bool>> getHasExistInFavorite(String idMeal) async {
+    try {
+      final result = await _local.getExistMealData(idMeal);
+      return DataState.success(data: result);
+    } catch (e) {
+      return DataState.error(message: e.toString());
+    }
+  }
+
+  @override
+  Future<DataState<bool>> removeFromFavorite(String idMeal) async {
+    try {
+      final result = await _local.deleteMealData(idMeal);
+      if(result == 0){
+        return const DataState.success(data: false);
+      }else{
+        return const DataState.success(data: true);
+      }
+    } catch (e) {
+      return DataState.error(message: e.toString());
+    }
+  }
+
+  @override
+  Future<DataState<List<MealDataEntity>>> getFavoriteList() async {
+    try {
+      final result = await _local.getAllMealRepo();
+      return DataState.success(
+          data: result.map((e) => _dataMapper.fromDbToEntity(e)).toList());
+    } catch (e) {
+      return DataState.error(message: e.toString());
+    }
   }
 }

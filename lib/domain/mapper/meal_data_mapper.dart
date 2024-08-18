@@ -1,10 +1,12 @@
+import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:msiglife_test/data/model/meal_data/meal_data_model.dart';
+import 'package:msiglife_test/data/repository/source/local/meal_local.dart';
 import 'package:msiglife_test/domain/entity/meal_data/meal_data.dart';
 
 @injectable
 class MealDataMapper {
-  MealDataEntity toEntity(MealDataModel model) {
+  MealDataEntity fromModelToEntity(MealDataModel model) {
     return MealDataEntity(
       idMeal: model.idMeal ?? '',
       strArea: model.strArea ?? '',
@@ -62,7 +64,7 @@ class MealDataMapper {
     );
   }
 
-  MealDataModel toModel(MealDataEntity entity) {
+  MealDataModel fromEntityToModel(MealDataEntity entity) {
     return MealDataModel(
       idMeal: entity.idMeal,
       strArea: entity.strArea,
@@ -117,6 +119,122 @@ class MealDataMapper {
       strImageSource: entity.strImageSource,
       strCreativeCommonsConfirmed: entity.strCreativeCommonsConfirmed,
       dateModified: entity.dateModified,
+    );
+  }
+
+  MealDataDbCompanion fromEntityToDb(MealDataEntity entity) {
+    return MealDataDbCompanion(
+      idMeal: Value(entity.idMeal),
+      strArea: Value(entity.strArea),
+      strCategory: Value(entity.strCategory),
+      strDrinkAlternate: Value(entity.strDrinkAlternate),
+      strIngredient10: Value(entity.strIngredient10),
+      strIngredient11: Value(entity.strIngredient11),
+      strIngredient12: Value(entity.strIngredient12),
+      strIngredient13: Value(entity.strIngredient13),
+      strIngredient14: Value(entity.strIngredient14),
+      strIngredient15: Value(entity.strIngredient15),
+      strIngredient16: Value(entity.strIngredient16),
+      strIngredient17: Value(entity.strIngredient17),
+      strIngredient18: Value(entity.strIngredient18),
+      strIngredient19: Value(entity.strIngredient19),
+      strIngredient1: Value(entity.strIngredient1),
+      strIngredient20: Value(entity.strIngredient20),
+      strIngredient2: Value(entity.strIngredient2),
+      strIngredient3: Value(entity.strIngredient3),
+      strIngredient4: Value(entity.strIngredient4),
+      strIngredient5: Value(entity.strIngredient5),
+      strIngredient6: Value(entity.strIngredient6),
+      strIngredient7: Value(entity.strIngredient7),
+      strIngredient8: Value(entity.strIngredient8),
+      strIngredient9: Value(entity.strIngredient9),
+      strInstructions: Value(entity.strInstructions),
+      strMeal: Value(entity.strMeal),
+      strMealThumb: Value(entity.strMealThumb),
+      strMeasure2: Value(entity.strMeasure2),
+      strMeasure3: Value(entity.strMeasure3),
+      strMeasure4: Value(entity.strMeasure4),
+      strMeasure5: Value(entity.strMeasure5),
+      strMeasure6: Value(entity.strMeasure6),
+      strMeasure7: Value(entity.strMeasure7),
+      strMeasure8: Value(entity.strMeasure8),
+      strMeasure9: Value(entity.strMeasure9),
+      strMeasure10: Value(entity.strMeasure10),
+      strMeasure11: Value(entity.strMeasure11),
+      strMeasure12: Value(entity.strMeasure12),
+      strMeasure13: Value(entity.strMeasure13),
+      strMeasure14: Value(entity.strMeasure14),
+      strMeasure15: Value(entity.strMeasure15),
+      strMeasure16: Value(entity.strMeasure16),
+      strMeasure17: Value(entity.strMeasure17),
+      strMeasure18: Value(entity.strMeasure18),
+      strMeasure19: Value(entity.strMeasure19),
+      strMeasure1: Value(entity.strMeasure1),
+      strMeasure20: Value(entity.strMeasure20),
+      strTags: Value(entity.strTags),
+      strYoutube: Value(entity.strYoutube),
+      strSource: Value(entity.strSource),
+      strImageSource: Value(entity.strImageSource),
+      strCreativeCommonsConfirmed: Value(entity.strCreativeCommonsConfirmed),
+      dateModified: Value(entity.dateModified),
+    );
+  }
+
+  MealDataEntity fromDbToEntity(MealDataDbData db) {
+    return MealDataEntity(
+      idMeal: db.idMeal,
+      strArea: db.strArea,
+      strCategory: db.strCategory,
+      strDrinkAlternate: db.strDrinkAlternate,
+      strIngredient10: db.strIngredient10,
+      strIngredient11: db.strIngredient11,
+      strIngredient12: db.strIngredient12,
+      strIngredient13: db.strIngredient13,
+      strIngredient14: db.strIngredient14,
+      strIngredient15: db.strIngredient15,
+      strIngredient16: db.strIngredient16,
+      strIngredient17: db.strIngredient17,
+      strIngredient18: db.strIngredient18,
+      strIngredient19: db.strIngredient19,
+      strIngredient1: db.strIngredient1,
+      strIngredient20: db.strIngredient20,
+      strIngredient2: db.strIngredient2,
+      strIngredient3: db.strIngredient3,
+      strIngredient4: db.strIngredient4,
+      strIngredient5: db.strIngredient5,
+      strIngredient6: db.strIngredient6,
+      strIngredient7: db.strIngredient7,
+      strIngredient8: db.strIngredient8,
+      strIngredient9: db.strIngredient9,
+      strInstructions: db.strInstructions,
+      strMeal: db.strMeal,
+      strMealThumb: db.strMealThumb,
+      strMeasure2: db.strMeasure2,
+      strMeasure3: db.strMeasure3,
+      strMeasure4: db.strMeasure4,
+      strMeasure5: db.strMeasure5,
+      strMeasure6: db.strMeasure6,
+      strMeasure7: db.strMeasure7,
+      strMeasure8: db.strMeasure8,
+      strMeasure9: db.strMeasure9,
+      strMeasure10: db.strMeasure10,
+      strMeasure11: db.strMeasure11,
+      strMeasure12: db.strMeasure12,
+      strMeasure13: db.strMeasure13,
+      strMeasure14: db.strMeasure14,
+      strMeasure15: db.strMeasure15,
+      strMeasure16: db.strMeasure16,
+      strMeasure17: db.strMeasure17,
+      strMeasure18: db.strMeasure18,
+      strMeasure19: db.strMeasure19,
+      strMeasure1: db.strMeasure1,
+      strMeasure20: db.strMeasure20,
+      strTags: db.strTags,
+      strYoutube: db.strYoutube,
+      strSource: db.strSource,
+      strImageSource: db.strImageSource,
+      strCreativeCommonsConfirmed: db.strCreativeCommonsConfirmed,
+      dateModified: db.dateModified,
     );
   }
 }

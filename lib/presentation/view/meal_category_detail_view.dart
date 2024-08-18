@@ -2,37 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:msiglife_test/di/injection.dart';
 import 'package:msiglife_test/presentation/blocs/meal_bloc.dart';
-import 'package:msiglife_test/presentation/category_detail/meal_category_detail.dart';
+import 'package:msiglife_test/presentation/view/meal_detail_view.dart';
 import 'package:msiglife_test/presentation/widget/meal_card_horizontal.dart';
 import 'package:msiglife_test/presentation/widget/meal_card_horizontal_loading.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class MealCategoryDetailView extends StatelessWidget {
+  final String category;
+
+  const MealCategoryDetailView({
+    super.key,
+    required this.category,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Screen"),
+        title: Text(category),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BlocConsumer<MealBloc, MealState>(
-            bloc: inject<MealBloc>()..add(const MealEvent.getMealsCategory()),
-            builder: (context, state) => state.mealsCategoryState.maybeWhen(
+            bloc: inject<MealBloc>()
+              ..add(MealEvent.getMealsListByCategory(category: category)),
+            builder: (context, state) =>
+                state.mealsListByCategoryState.maybeWhen(
               orElse: () => const SizedBox.shrink(),
               loading: () => GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
+                  crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   childAspectRatio: .65,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 shrinkWrap: true,
-                itemCount: 20,
+                itemCount: 6,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return const MealCardHorizontalLoading();
@@ -41,7 +48,7 @@ class HomeView extends StatelessWidget {
               success: (data) => GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
+                  crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   childAspectRatio: .65,
@@ -49,15 +56,29 @@ class HomeView extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: data.length,
                 itemBuilder: (context, index) => InkWell(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MealCategoryDetail(
-                        category: data[index].strCategory,
+                  onTap: () {
+                    context.read<MealBloc>()
+                      ..add(MealEvent.getExistInFavoriteList(
+                          id: data[index].idMeal))
+                      ..add(MealEvent.getDetailMealById(
+                          idMeal: data[index].idMeal));
+
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => BlocBuilder<MealBloc, MealState>(
+                          builder: (context, state) {
+                            if (state.mealData != null) {
+                              return MealDetailView(data: state.mealData!);
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                   child: MealCardHorizontal(
-                    title: data[index].strCategory,
+                    title: data[index].strMeal,
                     image: data[index].strMealThumb,
                   ),
                 ),

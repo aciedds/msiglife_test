@@ -15,4 +15,9 @@ abstract class MealRepository {
   });
 
   Future<DataState<MealDataEntity>> getMealById({required String idMeal});
+
+  Future<DataState<bool>> addToFavorite(MealDataEntity data);
+  Future<DataState<bool>> getHasExistInFavorite(String idMeal);
+  Future<DataState<bool>> removeFromFavorite(String idMeal);
+  Future<DataState<List<MealDataEntity>>> getFavoriteList();
 }

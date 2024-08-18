@@ -4,7 +4,7 @@ import 'package:msiglife_test/domain/entity/meal_category/meal_category_entity.d
 
 @injectable
 class MealCategoryMapper {
-  MealCategoryEntity toEntity(MealCategoryModel model) {
+  MealCategoryEntity fromModelToEntity(MealCategoryModel model) {
     return MealCategoryEntity(
       idCategory: model.idCategory ?? '',
       strCategory: model.strCategory ?? '',
@@ -13,7 +13,7 @@ class MealCategoryMapper {
     );
   }
 
-  MealCategoryModel toModel(MealCategoryEntity entity) {
+  MealCategoryModel fromEntityToModel(MealCategoryEntity entity) {
     return MealCategoryModel(
       idCategory: entity.idCategory,
       strCategory: entity.strCategory,

@@ -14,14 +14,22 @@ class MealState with _$MealState {
     // Meals List by Category
     required MealDataEntity? mealData,
     required ViewState<MealDataEntity> mealsDataState,
+    required bool isExistInFavorite,
+
+    // Meals List Favorite
+    required List<MealDataEntity> favoriteList,
+    required ViewState<List<MealDataEntity>> favoriteListState,
   }) = _MealState;
 
-  factory MealState.initial() => MealState(
+  factory MealState.initial() => const MealState(
         mealsCategory: [],
         mealsCategoryState: ViewState.initial(),
         mealsListByCategory: [],
         mealsListByCategoryState: ViewState.initial(),
         mealData: null,
         mealsDataState: ViewState.initial(),
+        favoriteList: [],
+        favoriteListState: ViewState.initial(),
+        isExistInFavorite: false,
       );
 }

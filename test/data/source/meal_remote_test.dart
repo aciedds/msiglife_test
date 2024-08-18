@@ -4,7 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:msiglife_test/data/model/meal_category/meal_category_model.dart';
 import 'package:msiglife_test/data/model/meal_filtered_data/meal_filtered_data_model.dart';
-import 'package:msiglife_test/data/repository/source/meal_remote.dart';
+import 'package:msiglife_test/data/repository/source/remote/meal_remote.dart';
 import 'package:msiglife_test/state/data_state/data_state.dart';
 
 import 'meal_remote_test.mocks.dart';
