@@ -17,16 +17,3 @@ Mobile Developer Assignment Test
    e. Modularization (Nilai +)
    f. Unit Testing (Nilai +)
    g. UI Testing (Nilai +)
-4. Silahkan upload
-   pribadi (set as public) kemudian kirim link-nya ke
-   ke GitHub
-   bernard@msiglife.co.id dan hedy.zakia@msiglife.co.id
-   Referensi Tech Stack:
-   1. BLoC => https://bloclibrary.dev/#/
-   2. Drift => https://pub.dev/packages/drift
-   3. Dio => https://pub.dev/packages/dio
-   4. Clean Architecture => https://resocoder.com/flutter-clean-architecture-tdd/
-   5. Modularization => https://pub.dev/packages/flutter_modular
-   6. Unit Testing => https://pub.dev/packages/bloc_test
-   7. UI Testing => https://flutter.dev/docs/cookbook/testing/integration/introduction
-   project, video recording demo aplikasi, dan juga apknya
