@@ -3,6 +3,7 @@ import './model/meal_filtered_data_model.dart' as meal_filtered_data_model;
 import './model/meal_data_model.dart' as meal_data_model;
 import './repository/source/local/meal_local_test.dart' as meal_local;
 import './repository/source/remote/meal_remote_test.dart' as meal_remote;
+import './repository/meal_repository_impl_test.dart' as meal_repository_impl;
 
 void main() {
   meal_category_model.main();
@@ -10,4 +11,5 @@ void main() {
   meal_data_model.main();
   meal_local.main();
   meal_remote.main();
+  meal_repository_impl.main();
 }

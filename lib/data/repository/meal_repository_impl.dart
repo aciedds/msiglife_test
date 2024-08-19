@@ -116,10 +116,11 @@ class MealRepositoryImpl implements MealRepository {
   @override
   Future<DataState<bool>> addToFavorite(data) async {
     try {
-      final result = await _local.insertMealData(_dataMapper.fromEntityToDb(data));
-      if(result == 0){
+      final result =
+          await _local.insertMealData(_dataMapper.fromEntityToDb(data));
+      if (result == 0) {
         return const DataState.success(data: false);
-      }else{
+      } else {
         return const DataState.success(data: true);
       }
     } catch (e) {
@@ -141,9 +142,9 @@ class MealRepositoryImpl implements MealRepository {
   Future<DataState<bool>> removeFromFavorite(String idMeal) async {
     try {
       final result = await _local.deleteMealData(idMeal);
-      if(result == 0){
+      if (result == 0) {
         return const DataState.success(data: false);
-      }else{
+      } else {
         return const DataState.success(data: true);
       }
     } catch (e) {
@@ -156,7 +157,8 @@ class MealRepositoryImpl implements MealRepository {
     try {
       final result = await _local.getAllMealRepo();
       return DataState.success(
-          data: result.map((e) => _dataMapper.fromDbToEntity(e)).toList());
+        data: result.map((e) => _dataMapper.fromDbToEntity(e)).toList(),
+      );
     } catch (e) {
       return DataState.error(message: e.toString());
     }
