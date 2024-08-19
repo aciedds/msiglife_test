@@ -14,6 +14,8 @@ part 'meal_local.g.dart';
 class MealLocal extends _$MealLocal {
   MealLocal() : super(_openConnection());
 
+  MealLocal.forTesting(super.e);
+
   @override
   int get schemaVersion => 1;
 

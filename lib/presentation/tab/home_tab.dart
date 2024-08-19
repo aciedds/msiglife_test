@@ -19,7 +19,7 @@ class HomeTab extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: BlocConsumer<MealBloc, MealState>(
+          child: BlocBuilder<MealBloc, MealState>(
             bloc: inject<MealBloc>()..add(const MealEvent.getMealsCategory()),
             builder: (context, state) => state.mealsCategoryState.maybeWhen(
               orElse: () => const SizedBox.shrink(),
@@ -63,16 +63,16 @@ class HomeTab extends StatelessWidget {
                 ),
               ),
             ),
-            listener: (BuildContext context, MealState state) {
-              state.mealsListByCategoryState.maybeWhen(
-                orElse: () => const SizedBox.shrink(),
-                error: (message) => ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(message),
-                  ),
-                ),
-              );
-            },
+            // listener: (BuildContext context, MealState state) {
+            //   state.mealsListByCategoryState.maybeWhen(
+            //     orElse: () => const SizedBox.shrink(),
+            //     error: (message) => ScaffoldMessenger.of(context).showSnackBar(
+            //       SnackBar(
+            //         content: Text(message),
+            //       ),
+            //     ),
+            //   );
+            // },
           ),
         ),
       ),

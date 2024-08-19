@@ -21,7 +21,7 @@ class MealState with _$MealState {
     required ViewState<List<MealDataEntity>> favoriteListState,
   }) = _MealState;
 
-  factory MealState.initial() => const MealState(
+  factory MealState.initial() => MealState(
         mealsCategory: [],
         mealsCategoryState: ViewState.initial(),
         mealsListByCategory: [],

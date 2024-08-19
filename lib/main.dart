@@ -16,9 +16,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => inject<MealBloc>(),
-      child: MaterialApp(
-        home: const HomeView(),
-        theme: ThemeData.dark(),
+      child: const MaterialApp(
+        home: HomeView(),
       ),
     );
   }
