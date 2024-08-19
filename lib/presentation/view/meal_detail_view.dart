@@ -6,7 +6,10 @@ import 'package:msiglife_test/presentation/blocs/meal_bloc.dart';
 class MealDetailView extends StatelessWidget {
   final MealDataEntity data;
 
-  const MealDetailView({super.key, required this.data});
+  const MealDetailView({
+    super.key,
+    required this.data,
+  });
 
   void _onPress(BuildContext context, bool isExistedInWatchlist) {
     if (!isExistedInWatchlist) {
@@ -37,12 +40,7 @@ class MealDetailView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {
-            context.read<MealBloc>()
-              ..add(const GetMealFavoriteEvent())
-              ..add(const GetMealsCategory());
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
@@ -163,11 +161,11 @@ class MealDetailView extends StatelessWidget {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(getIngredient(i) ?? ''),
+                                        child: Text(getIngredient(i)),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(getMeasure(i) ?? ''),
+                                        child: Text(getMeasure(i)),
                                       ),
                                     ],
                                   ),
@@ -194,7 +192,7 @@ class MealDetailView extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         'Step ${i + 1}',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -204,9 +202,7 @@ class MealDetailView extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         instructions[i],
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
+                                        style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
                                   ],

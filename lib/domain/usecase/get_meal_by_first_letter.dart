@@ -3,7 +3,7 @@ import 'package:msiglife_test/domain/entity/meal_filtered_data/meal_filtered_dat
 import 'package:msiglife_test/domain/repository/meal_repository.dart';
 import 'package:msiglife_test/state/data_state/data_state.dart';
 
-@injectable
+@lazySingleton
 class GetMealByFirstLetterUc {
   final MealRepository _repository;
 

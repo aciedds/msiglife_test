@@ -17,7 +17,7 @@ part 'meal_bloc.freezed.dart';
 part 'meal_event.dart';
 part 'meal_state.dart';
 
-@injectable
+@lazySingleton
 class MealBloc extends Bloc<MealEvent, MealState> {
   final GetMealCategoryUc _getMealCategory;
   final GetMealByCategoryUc _getMealByCategory;

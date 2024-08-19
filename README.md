@@ -15,5 +15,5 @@ Mobile Developer Assignment Test
    c. Dio (Wajib) (done)
    d. Clean Architecture (Nilai +) (done)
    e. Modularization (Nilai +)
-   f. Unit Testing (Nilai +)
+   f. Unit Testing (Nilai +) (done)
    g. UI Testing (Nilai +)

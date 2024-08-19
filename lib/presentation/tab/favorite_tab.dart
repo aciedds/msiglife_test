@@ -37,11 +37,16 @@ class FavoriteTab extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: data.length,
                 itemBuilder: (context, index) => InkWell(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MealDetailView(data: data[index]),
-                    ),
-                  ),
+                  onTap: () {
+                    context.read<MealBloc>().add(
+                        MealEvent.getExistInFavoriteList(
+                            id: data[index].idMeal));
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MealDetailView(data: data[index]),
+                      ),
+                    );
+                  },
                   child: MealCardVertical(
                     title: data[index].strMeal,
                     image: data[index].strMealThumb,

@@ -3,7 +3,7 @@ import 'package:msiglife_test/domain/entity/meal_category/meal_category_entity.d
 import 'package:msiglife_test/domain/repository/meal_repository.dart';
 import 'package:msiglife_test/state/data_state/data_state.dart';
 
-@injectable
+@lazySingleton
 class GetMealCategoryUc {
   final MealRepository _repository;
 
