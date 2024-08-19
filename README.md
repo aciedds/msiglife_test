@@ -42,6 +42,4 @@ To run this application locally:
    ```
 ## Video Demo
 
-
-
-## APK
+https://github.com/user-attachments/assets/c78fac00-d783-46fc-aeef-b92c9635691b
